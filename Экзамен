@@ -1,7 +1,8 @@
 ВСЕ ЗАДАНИЯ СДЕЛАНЫ НА DEBIAN 12!!!
 
 
-Где одна машина можно и на Дебиан 13 чтоб все сработало но нужно будет прописать в начале
+Где одна машина можно и на Дебиан 13 
+но нужно будет прописать в начале
 nano /etc/apt/sources.list и закомментировать 1 строку
 
 
@@ -13,17 +14,21 @@ nano /etc/apt/sources.list и закомментировать 1 строку
 Днс 8.8.8.8
 
 
-1. Установить пакет для работы с утилитами ping, traceroute, netstat. Показать принцип работы этих команд и объяснить их назначение.
+1. Установить пакет для работы с утилитами ping, traceroute, netstat. 
+Показать принцип работы этих команд и объяснить их назначение.
 (1 машина, включить инет)
 apt update
 apt install net-tools
 Все теперь проверяем
 ping 1.1
 traceroute google.com
-netstat -a (можно -at или -au) или же показать что есть новый способ ss -netstat
+netstat -a (можно -at или -au) 
+или же показать что есть новый способ ss -netstat
 
 
-2. Создайте двух пользователей: user1 и user2. Установите для них пароли и войдите в систему под именем одного из созданных пользователей. 
+2. Создайте двух пользователей: user1 и user2. 
+Установите для них пароли и войдите в систему 
+под именем одного из созданных пользователей. 
 Пользователю user2 выдать sudo права.
 (1 машина, включить инет)
 apt update
@@ -35,7 +40,8 @@ usermod -aG sudo user2
 su user2
 
 
-4. Установить веб-сервер apache. Добавить в него файл с содержанием.
+4. Установить веб-сервер apache. 
+Добавить в него файл с содержанием.
 (1 машина, включить инет)
 apt update
 apt install apache2
@@ -53,12 +59,11 @@ nano /var/www/html/index.html
 
 
 5. Создайте резервные копии файлов: 
-Настройте расписание выполнения резервного копирования с помощью
-crontab.
-Создайте скрипт на Bash, который будет выполнять резервное
-копирование любого файла или папки.
-Убедитесь, что резервные копии создаются согласно расписанию и
-сохраняются в нужных местах.
+Настройте расписание выполнения резервного копирования с помощью crontab.
+Создайте скрипт на Bash, который будет 
+выполнять резервное копирование любого файла или папки.
+Убедитесь, что резервные копии создаются согласно расписанию 
+и сохраняются в нужных местах.
 (1 машина, включить инет)
 apt update
 nano /usr/local/bin/backup.sh
@@ -81,8 +86,9 @@ sudo /usr/local/bin/backup.sh /home/user/docs
 ls -lh /backups/
 
 
-7. Показать работу команд mkdir, chmod, cp, copy, mv, rm Создать 
-файл «text1.txt» и переименовать его в командой строке в «text2.txt»
+7. Показать работу команд mkdir, chmod, cp, copy, mv, rm 
+Создать файл «text1.txt» и переименовать его 
+в командой строке в «text2.txt»
 (1 машина, включить инет)
 apt update
 Создать папку
@@ -104,12 +110,15 @@ cd ..
 rm -r test_dir
 
 
-8. Настроить протокол SSH на сервере и подключиться удаленно от 
-клиента. Объяснить принцип работы протокола.
-(2 машина, включить инет, на сервере установить (apt install iptables) iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE и сохранить apt install iptables-persistent
+8. Настроить протокол SSH на сервере и подключиться удаленно от клиента. 
+Объяснить принцип работы протокола.
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4,
 На клиенте и сервере сделать
-nano /etc/sysctl.conf разкоментировать net.ipv4.ip_forward=1 и reboot обязательно)
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 apt update
 apt install openssh-server -y
 systemctl enable --now SSH
@@ -119,13 +128,16 @@ passwd user
 ssh user@192.168.1.1 (IP сервера)
 
 
-9. Настройте службу сетевого времени на базе сервиса chrony. В 
-качестве сервера выступает Server-chrony. В качестве клиента настройте ВМ
-client. В качестве клиента настройте ВМ client
-(2 машина, включить инет, на сервере установить (apt install iptables) iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE и сохранить apt install iptables-persistent
+9. Настройте службу сетевого времени на базе сервиса chrony. 
+В качестве сервера выступает Server-chrony. 
+В качестве клиента настройте ВМ client. 
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4,
 На клиенте и сервере сделать
-nano /etc/sysctl.conf разкоментировать net.ipv4.ip_forward=1 и reboot обязательно)
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 apt update
 apt install chrony -y
 nano /etc/chrony/chrony.conf
@@ -144,10 +156,13 @@ chronyc sources
 
 
 10,6,3 задание.
-(2 машина, включить инет, на сервере установить (apt install iptables) iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE и сохранить apt install iptables-persistent
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4,
 На клиенте и сервере сделать
-nano /etc/sysctl.conf разкоментировать net.ipv4.ip_forward=1 и reboot обязательно)
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 apt update
 apt install isc-dhcp-server
 nano /etc/default/isc-dhcp-server
@@ -167,37 +182,40 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 Сохраняем и далее
 Для 3 задания
 subnet 192.168.1.0 netmask 255.255.255.240 {
-option routers 192.168.1.1;
-option domain-name-servers 8.8.8.8;
-option broadcast-address 192.168.1.15;
-default-lease-time 600;
-max-lease-time 7200;
+   option routers 192.168.1.1;
+   option domain-name-servers 8.8.8.8;
+   option broadcast-address 192.168.1.15;
+   default-lease-time 600;
+   max-lease-time 7200;
 
-host server {
-hardware ethernet 50:41:90:01:59:01; 
-fixed-address 192.168.1.1;
+   host server {
+   hardware ethernet 50:41:90:01:59:01; 
+   fixed-address 192.168.1.1;
+   }
+
+   host client1 {
+   hardware ethernet 50:d4:59:01:ba:00; 
+   fixed-address 192.168.1.2;
+   }
 }
-
-host client1 {
-hardware ethernet 50:d4:59:01:ba:00; 
-fixed-address 192.168.1.2;
-}
-
 
 systemctl start isc-dhcp-server
 systemctl enable isc-dhcp-server
 systemctl status isc-dhcp-server
 
 
-11. Создать виртуальную топологию в программе PNETLab (или 
-аналогичной). Установить и настроить DNS-сервер. Настроить сервер как
-шлюз для клиентов с NAT и пересылкой DNS запросов. Подключить клиента
-к серверу и проверить разрешение имён и доступ в интернет. Проверить
-работоспособность DNS-сервера локально и удалённо.
-(2 машина, включить инет, на сервере установить (apt install iptables) iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE и сохранить apt install iptables-persistent
+11. Создать виртуальную топологию в программе PNETLab (или аналогичной). 
+Установить и настроить DNS-сервер. 
+Настроить сервер как шлюз для клиентов с NAT и пересылкой DNS запросов. 
+Подключить клиента к серверу и проверить разрешение имён и доступ в интернет. 
+Проверить работоспособность DNS-сервера локально и удалённо.
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4,
 На клиенте и сервере сделать
-nano /etc/sysctl.conf разкоментировать net.ipv4.ip_forward=1 и reboot обязательно)
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 На сервере
 apt update
 apt install bind9
@@ -214,13 +232,15 @@ dig @192.168.1.1 google.com
 dig @127.0.0.1 google.com
 
 
-12. Настроить динамическую маршрутизацию по службе frr между 
-двумя узлами. Выбрать протокол динамической маршрутизации и
-обосновать его выбор.
-(2 машина, включить инет, на сервере установить (apt install iptables) iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE и сохранить apt install iptables-persistent
+12. Настроить динамическую маршрутизацию по службе frr между двумя узлами. 
+Выбрать протокол динамической маршрутизации и обосновать его выбор.
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4,
 На клиенте и сервере сделать
-nano /etc/sysctl.conf разкоментировать net.ipv4.ip_forward=1 и reboot обязательно)
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 apt update
 apt install frr 
 nano /etc/frr/daemons
@@ -247,10 +267,13 @@ show ip ospf neighbor
 
 13. Между двумя узлами необходимо сконфигурировать ip туннель. 
 На выбор технологии GRE или IP in IP. Сведения о туннеле занесите в отчёт
-(3 машина, включить инет, на сервере установить (apt install iptables) iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE и сохранить apt install iptables-persistent
+(3 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4,
 На клиенте и сервере сделать
-nano /etc/sysctl.conf разкоментировать net.ipv4.ip_forward=1 и reboot обязательно)
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 apt update
 Кратко
 1клиент
@@ -269,10 +292,13 @@ nmcli con up id gre
 
 
 14.  Настройка динамической трансляции адресов на двух узлах сети.
-(2 машина, включить инет, на сервере установить (apt install iptables) iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE и сохранить apt install iptables-persistent
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4,
 На клиенте и сервере сделать
-nano /etc/sysctl.conf разкоментировать net.ipv4.ip_forward=1 и reboot обязательно)
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 И это все задние)
 
 
@@ -284,8 +310,8 @@ apt install iftop
 iftop -I ens3
 
 
-16. Задать имя хоста по типу: «ФАМИЛИЯ_ГРУППА». Поменять 
-часовой на местное время.
+16. Задать имя хоста по типу: «ФАМИЛИЯ_ГРУППА». 
+Поменять часовой на местное время.
 (1 машина, включить инет)
 apt update
 hostnamectl set-hostname "miluhin_9sad"
