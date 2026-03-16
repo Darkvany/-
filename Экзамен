@@ -118,11 +118,11 @@ nano /etc/sysctl.conf разкоментировать
 net.ipv4.ip_forward=1 и reboot обязательно)
 apt update
 apt install openssh-server -y
-systemctl enable --now SSH
-mkdir user
+systemctl enable --now ssh
+useradd user
 passwd user
 На клиенте заходим
-ssh user@192.168.1.1 (IP сервера)
+ssh user@192.168.1.1
 
 
 9. Настройте службу сетевого времени на базе сервиса chrony. 
