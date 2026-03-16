@@ -108,8 +108,7 @@ cd ..
 rm -r test_dir
 
 
-8. Настроить протокол SSH на сервере и подключиться удаленно от клиента. 
-Объяснить принцип работы протокола.
+8. Настроить протокол SSH на сервере и подключиться удаленно от клиента.
 (2 машина, включить инет, на сервере установить (apt install iptables) 
 iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
 и сохранить apt install iptables-persistent
@@ -202,7 +201,7 @@ systemctl enable isc-dhcp-server
 systemctl status isc-dhcp-server
 
 
-11. Создать виртуальную топологию в программе PNETLab (или аналогичной). 
+11. Создать виртуальную топологию в программе PNETLab
 Установить и настроить DNS-сервер. 
 Настроить сервер как шлюз для клиентов с NAT и пересылкой DNS запросов. 
 Подключить клиента к серверу и проверить разрешение имён и доступ в интернет. 
@@ -230,8 +229,7 @@ dig @192.168.1.1 google.com
 dig @127.0.0.1 google.com
 
 
-12. Настроить динамическую маршрутизацию по службе frr между двумя узлами. 
-Выбрать протокол динамической маршрутизации и обосновать его выбор.
+12. Настроить динамическую маршрутизацию по службе frr между двумя узлами.
 (2 машина, включить инет, на сервере установить (apt install iptables) 
 iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
 и сохранить apt install iptables-persistent
@@ -264,7 +262,7 @@ show ip ospf neighbor
 
 
 13. Между двумя узлами необходимо сконфигурировать ip туннель. 
-На выбор технологии GRE или IP in IP. Сведения о туннеле занесите в отчёт
+На выбор технологии GRE или IP in IP.
 (3 машина, включить инет, на сервере установить (apt install iptables) 
 iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
 и сохранить apt install iptables-persistent
@@ -317,9 +315,14 @@ timedatactl set-timezones Asia/Krasnoyarsk
 
 
 17. Измерьте пропускную способность сети между двумя узлами по 
-средствам утилиты iperf3. Предоставьте описание пропускной способности
-канала со скриншотами.
-(1 машина, включить инет)
+средствам утилиты iperf3.
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
+iptables-save > /etc/iptables/rules.v4,
+На клиенте и сервере сделать
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 Установка
 apt update
 apt install iperf3 -y
@@ -334,6 +337,4 @@ iperf3 -c 192.168.1.1
 Сервер должен находиться в ID VLAN 100
 Клиент в ID VLAN 200
 Создайте подсеть управления с ID VLAN 999
-Основные сведения о настройке коммутатора и выбора реализации
-разделения на VLAN занесите в отчёт
 (ПОЗЖЕ)
