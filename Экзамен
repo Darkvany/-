@@ -80,7 +80,7 @@ crontab -e
 0 3 * * * /usr/local/bin/backup.sh /home/user/docs
 mkdir -p /home/user/docs
 sudo /usr/local/bin/backup.sh /home/user/docs
-ls -lh /backups/
+ls -lh /backup/
 
 
 7. Показать работу команд mkdir, chmod, cp, copy, mv, rm 
