@@ -299,10 +299,17 @@ net.ipv4.ip_forward=1 и reboot обязательно)
 
 15. С помощью системы мониторинга сети в Linux презентовать 
 просмотр трафика. Систему мониторинга выбрать на свое усмотрение.
-(1 машина, включить инет)
+(2 машина, включить инет, на сервере установить (apt install iptables) 
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
+iptables-save > /etc/iptables/rules.v4,
+На клиенте и сервере сделать
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
+на клиенте
 apt update
 apt install iftop
-iftop -I ens3
+iftop -i ens3
 
 
 16. Задать имя хоста по типу: «ФАМИЛИЯ_ГРУППА». 
