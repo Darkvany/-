@@ -311,7 +311,7 @@ iftop -I ens3
 (1 машина, включить инет)
 apt update
 hostnamectl set-hostname "miluhin_9sad"
-timedatactl set-timezones Asia/Krasnoyarsk
+dpkg-reconfigure tzdata
 
 
 17. Измерьте пропускную способность сети между двумя узлами по 
