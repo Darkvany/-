@@ -20,8 +20,7 @@ apt install net-tools
 Все теперь проверяем
 ping 1.1
 traceroute google.com
-netstat -a (можно -at или -au) 
-или же показать что есть новый способ ss -netstat
+netstat -a или ss -netstat
 
 
 2. Создайте двух пользователей: user1 и user2. 
