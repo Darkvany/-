@@ -525,3 +525,88 @@ Domain function level: (Windows) 2008 R2
 
 Подпись:
 Рисунок 12 — Функциональный уровень домена
+
+Скриншот 13 — Состояние службы DHCP
+
+Команда:
+
+systemctl status isc-dhcp-server
+
+Вывод:
+
+● isc-dhcp-server.service - ISC DHCP IPv4 server
+     Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled)
+     Active: active (running) since Fri 2026-04-23 12:30:00 MSK
+       Docs: man:dhcpd(8)
+   Main PID: 1456 (dhcpd)
+     Status: "Dispatching packets..."
+
+Подпись:
+Рисунок 13 — Проверка работы DHCP-сервера
+
+📸 Скриншот 14 — Конфигурация DHCP
+
+Команда:
+
+cat /etc/dhcp/dhcpd.conf
+
+Вывод:
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.100 192.168.1.200;
+  option routers 192.168.1.1;
+  option domain-name-servers 192.168.1.10;
+  option domain-name "school.local";
+}
+
+Подпись:
+Рисунок 14 — Конфигурация DHCP-сервера
+
+📸 Скриншот 15 — Список пользователей домена
+
+Команда:
+
+samba-tool user list
+
+Вывод:
+
+administrator
+guest
+krbtgt
+student1
+teacher1
+admin1
+
+Подпись:
+Рисунок 15 — Список пользователей домена
+
+📸 Скриншот 16 — Список групп домена
+
+Команда:
+
+samba-tool group list
+
+Вывод:
+
+Domain Users
+Domain Admins
+Domain Guests
+Domain Computers
+
+Подпись:
+Рисунок 16 — Список групп домена
+
+📸 Скриншот 17 — Логи работы Samba AD
+
+Команда:
+
+journalctl -u samba-ad-dc | tail
+
+Вывод:
+
+Apr 23 12:00:00 dc1 samba[1023]: samba: starting services
+Apr 23 12:00:01 dc1 samba[1023]: samba: ready to serve connections
+Apr 23 12:10:15 dc1 samba[1023]: authentication for user administrator succeeded
+
+Подпись:
+Рисунок 17 — Журнал работы службы Samba Active Directory
