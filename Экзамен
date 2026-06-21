@@ -10,7 +10,13 @@
 Сервер на клиент 192.168.1.1/28
 Клиент на сервер 192.168.1.2/28
 Днс 8.8.8.8
-
+настройка iptables кратко
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE 
+и сохранить apt install iptables-persistent
+iptables-save > /etc/iptables/rules.v4,
+На клиенте и сервере сделать
+nano /etc/sysctl.conf разкоментировать 
+net.ipv4.ip_forward=1 и reboot обязательно)
 
 1. Установить пакет для работы с утилитами ping, traceroute, netstat. 
 Показать принцип работы этих команд и объяснить их назначение.
