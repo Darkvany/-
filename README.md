@@ -437,9 +437,9 @@ HQ-RTR и обмена внутренними маршрутами
 На
 <img width="917" height="128" alt="image" src="https://github.com/user-attachments/assets/790cdbe4-f80b-4950-a978-4ecfe9942e04" />
 Перемещаемся к концу файла
-<img width="911" height="342" alt="image" src="https://github.com/user-attachments/assets/31e2ea3d-8e00-4230-9ed2-67f0b415fab4" />
-Добавляем в конец настройку DHCP
 <img width="975" height="703" alt="image" src="https://github.com/user-attachments/assets/504a3499-fb6e-4f79-93e2-f81b3b913240" />
+Добавляем в конец настройку DHCP
+<img width="911" height="342" alt="image" src="https://github.com/user-attachments/assets/31e2ea3d-8e00-4230-9ed2-67f0b415fab4" />
 Тут 2 пробела перед range и option
 •	subnet - обозначает сеть, в области которой будет работать данная группа настроек;
 •	range — диапазон, из которого будут браться IP-адреса;
