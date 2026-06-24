@@ -181,9 +181,9 @@ userdel имя пользователя
 добавляем строчку
 <img width="617" height="41" alt="image" src="https://github.com/user-attachments/assets/97ea55eb-6982-4266-b5d1-b6f62bd48466" />
 После слова sshuser нажимаем TAB, пишем ALL=(ALL:ALL), затем жмем пробел и пишем NOPASSWD:ALL
-<img width="483" height="40" alt="image" src="https://github.com/user-attachments/assets/b79b29bd-6b18-4b1b-88be-a55c68ecdb01" />
-Проверяем наших пользователей sshuser
 <img width="903" height="820" alt="image" src="https://github.com/user-attachments/assets/aaad3d1e-a98a-49dd-9a0c-1fc456c0c054" />
+Проверяем наших пользователей sshuser
+<img width="483" height="40" alt="image" src="https://github.com/user-attachments/assets/b79b29bd-6b18-4b1b-88be-a55c68ecdb01" />
 Обратим внимание, что при логине пароль не требуется
 <img width="408" height="42" alt="image" src="https://github.com/user-attachments/assets/376242dd-8d40-4df2-a123-90a941b724ee" />
 Повышаем права через sudo –i, видим что также все работает без пароля
