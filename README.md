@@ -312,14 +312,14 @@ RTR необходимо сконфигурировать ip туннель:
 •	Задаём «Удаленный IP» (IP на интерфейсе HQ-RTR в сторону ISP 172.16.1.2)
 •	Переходим к «КОНФИГУРАЦИЯ IPv4», переключаем на «Вручную»
 •	Задаём адрес IPv4 для туннеля (10.10.0.2/30)
-<img width="792" height="47" alt="image" src="https://github.com/user-attachments/assets/27ca002d-40a1-4e97-94cd-9e84c3f09ff4" />
+<img width="955" height="536" alt="image" src="https://github.com/user-attachments/assets/c74f2ed8-3e42-4a28-85d1-d08765de5368" />
 Выходим
 Заходим в файл /etc/network/interfaces
-<img width="606" height="65" alt="image" src="https://github.com/user-attachments/assets/aaed39a8-cf13-4aea-9ce9-c469f0c87d57" />
+<img width="792" height="47" alt="image" src="https://github.com/user-attachments/assets/27ca002d-40a1-4e97-94cd-9e84c3f09ff4" />
 В самом конце файла добавляем строчку для поднятия интерфейса GRE
-<img width="799" height="52" alt="image" src="https://github.com/user-attachments/assets/6fe30b3b-9d09-4bf9-862c-a72c1b475f82" />
+<img width="606" height="65" alt="image" src="https://github.com/user-attachments/assets/aaed39a8-cf13-4aea-9ce9-c469f0c87d57" />
 Перезапускаем службу сети
-<img width="955" height="536" alt="image" src="https://github.com/user-attachments/assets/c74f2ed8-3e42-4a28-85d1-d08765de5368" />
+<img width="799" height="52" alt="image" src="https://github.com/user-attachments/assets/6fe30b3b-9d09-4bf9-862c-a72c1b475f82" />
 Проверяем, что gre0 перешел в статус UNKNOWN и tun1 приобрел IP-адрес
 <img width="926" height="114" alt="image" src="https://github.com/user-attachments/assets/401cd773-e1a6-4441-8d76-a3aecda20096" />
 Изменяем TTL интерфейса GRE на 64
