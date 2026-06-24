@@ -1,4 +1,4 @@
-РАЗВЕРТЫВАНИЕ СТЕНДА
+РАЗВЕРТЫВАНИЕ СТЕНДА                                                                                                                
 Создадим в PNetLab такую схему:
 <img width="489" height="612" alt="image" src="https://github.com/user-attachments/assets/fbd194f9-9ff4-4e87-b35e-97cfc1ffebfb" />
 1.	Net: cloud_nat
