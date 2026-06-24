@@ -224,9 +224,9 @@ userdel имя пользователя
 VLAN-интерфейсы, назначить им IP-адреса, а также поднять мост
 <img width="792" height="41" alt="image" src="https://github.com/user-attachments/assets/cf3a44fd-3437-476b-bdf2-972fe7da2e4a" />
 Модифицируем файл таким образом:
-<img width="794" height="46" alt="image" src="https://github.com/user-attachments/assets/39209748-a35e-4ea1-98b8-c0f64e4976fe" />
-Перезагружаем сеть
 <img width="805" height="984" alt="image" src="https://github.com/user-attachments/assets/ac6656b3-1865-4c2c-94cc-a7acc1126b3c" />
+Перезагружаем сеть
+<img width="794" height="46" alt="image" src="https://github.com/user-attachments/assets/39209748-a35e-4ea1-98b8-c0f64e4976fe" />
 Проверяем адресацию
 <img width="974" height="261" alt="image" src="https://github.com/user-attachments/assets/fa4919e7-8936-459c-bc15-f22ab8ffe35b" />
 Теперь попробуем пингануть HQ-SRV и HQ-CLI с HQ-RTR
