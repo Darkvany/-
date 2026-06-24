@@ -259,10 +259,258 @@ BR-SRV:
 •	Настройте баннер «Authorized access only».
 Устанавливаем SSH-сервер на HQ-SRV и BR-SRV
 <img width="778" height="43" alt="image" src="https://github.com/user-attachments/assets/31854ce4-1185-406b-b13c-0f50d0204565" />
-
+<img width="772" height="41" alt="image" src="https://github.com/user-attachments/assets/affc023d-9c1a-4f26-bfae-ddab9ce1b620" />
 Редактируем конфигурацию
+<img width="749" height="36" alt="image" src="https://github.com/user-attachments/assets/f5f15f54-0914-439e-aad8-92606409cb83" />
+<img width="955" height="716" alt="image" src="https://github.com/user-attachments/assets/9313bbe0-44ea-418e-8698-63136a977722" />
+Раскомментируем строчку Port 22, и изменим порт на 2026
+<img width="391" height="143" alt="image" src="https://github.com/user-attachments/assets/7bbc8edb-f8df-41ad-b7f6-2f340eccfee2" />
+Разрешим вход только пользователем sshuser
+<img width="908" height="804" alt="image" src="https://github.com/user-attachments/assets/02598e58-3327-4e6c-a98e-11216ba09494" />
+Ограничиваем на две попытки входа
+<img width="403" height="131" alt="image" src="https://github.com/user-attachments/assets/cbb0403b-e030-4207-af91-2e236c563e88" />
+Зададим также баннер
+<img width="446" height="156" alt="image" src="https://github.com/user-attachments/assets/d6d01cbb-a877-40d2-8275-f2841a27d84b" />
+Выходим с файла
+Создадим баннер по пути /etc/ssh_banner
+<img width="653" height="47" alt="image" src="https://github.com/user-attachments/assets/d26ca0b0-cd6f-4c6f-b54c-77daf5b4213b" />
+В баннере звездочками делаем рамку, и вписываем туда «Authorized access
+only»
+<img width="814" height="811" alt="image" src="https://github.com/user-attachments/assets/576f2a33-9321-48c2-814c-a2aa7dd67703" />
+Тоже самое делаем и на BR-SRV.
+Перезагружаем SSH
+<img width="702" height="39" alt="image" src="https://github.com/user-attachments/assets/84c1c70b-2a3d-4102-9eb5-daed22edbd8e" />
+<img width="695" height="39" alt="image" src="https://github.com/user-attachments/assets/11f8302a-1c45-4136-8465-ee984678b79a" />
+Попробуем подключиться по SSH с HQ-CLI на HQ-SRV
+<img width="902" height="44" alt="image" src="https://github.com/user-attachments/assets/9acc2c66-4e2c-4bed-8a70-be8a38d29ae4" />
+Пишем «yes»
+<img width="979" height="80" alt="image" src="https://github.com/user-attachments/assets/9301818a-c4fe-4d8d-a794-a34f5d572245" />
+Баннер отображается корректно. Вводим пароль
+<img width="728" height="255" alt="image" src="https://github.com/user-attachments/assets/e9c8f1c2-f52e-4ec5-a65d-f79f74e9731f" />
+Как видим, все работает
+<img width="954" height="259" alt="image" src="https://github.com/user-attachments/assets/f25b3851-489a-4055-ab62-e826b9c51bad" />
 
+6.	Между офисами HQ и BR, на маршрутизаторах HQ-RTR и BR-
+RTR необходимо сконфигурировать ip туннель:
+•	На выбор технологии GRE или IP in IP
+•	Сведения о туннеле занесите в отчёт.
+Производим настройку на HQ-RTR.
+•	Выбираем «Редактировать подключения»
+•	Выбираем «Добавить»
+•	Выбираем «Туннель IP»
+•	Задаём понятные имена «Имя профиля» и «Устройство»
+•	«Режим» выбираем «GRE»
+•	«Родительский» указываем интерфейс в сторону ISP (ens3)
+•	Задаём «Локальный IP» (IP на интерфейсе HQ-RTR в сторону ISP 172.16.1.2)
+•	Задаём «Удаленный IP» (IP на интерфейсе BR-RTR в сторону ISP 172.16.2.2)
+•	Переходим к «КОНФИГУРАЦИЯ IPv4», переключаем на «Вручную»
+•	Задаём адрес IPv4 для туннеля (10.10.0.1/30)
+<img width="806" height="42" alt="image" src="https://github.com/user-attachments/assets/47cad913-2157-4a68-9a46-f27f369c9038" />
+<img width="780" height="611" alt="image" src="https://github.com/user-attachments/assets/b25274c0-3c1d-4e73-97ca-0b15db912e96" />
+Выходим
+Заходим в файл /etc/network/interfaces
+<img width="531" height="83" alt="image" src="https://github.com/user-attachments/assets/2e6eb6e5-49e7-4955-90f1-0c7c76b1ec95" />
+В самом конце файла добавляем строчку для поднятия интерфейса GRE
+<img width="975" height="753" alt="image" src="https://github.com/user-attachments/assets/89baf958-1c03-4cfa-ae5a-ca4c27b50848" />
+Перезапускаем службу сети
+<img width="775" height="37" alt="image" src="https://github.com/user-attachments/assets/9c2dbc98-a632-4ecc-a315-f90c144d6f12" />
+Проверяем, что gre0 перешел в статус UNKNOWN и tun1 приобрел IP-адрес
+<img width="973" height="114" alt="image" src="https://github.com/user-attachments/assets/70c77b89-8748-4700-ab31-dd4ceeddee79" />
+Изменяем TTL интерфейса GRE на 64
+<img width="975" height="35" alt="image" src="https://github.com/user-attachments/assets/f67367f4-e296-4d70-9930-7c44e2bc9b3e" />
+Производим настройку на BR-RTR.
+•	Выбираем «Редактировать подключения»
+•	Выбираем «Добавить»
+•	Выбираем «Туннель IP»
+•	Задаём понятные имена «Имя профиля» и «Устройство»
+•	«Режим» выбираем «GRE»
+•	«Родительский» указываем интерфейс в сторону ISP (ens3)
+•	Задаём «Локальный IP» (IP на интерфейсе BR-RTR в сторону ISP 172.16.2.2)
+•	Задаём «Удаленный IP» (IP на интерфейсе HQ-RTR в сторону ISP 172.16.1.2)
+•	Переходим к «КОНФИГУРАЦИЯ IPv4», переключаем на «Вручную»
+•	Задаём адрес IPv4 для туннеля (10.10.0.2/30)
+<img width="792" height="47" alt="image" src="https://github.com/user-attachments/assets/27ca002d-40a1-4e97-94cd-9e84c3f09ff4" />
+Выходим
+Заходим в файл /etc/network/interfaces
+<img width="606" height="65" alt="image" src="https://github.com/user-attachments/assets/aaed39a8-cf13-4aea-9ce9-c469f0c87d57" />
+В самом конце файла добавляем строчку для поднятия интерфейса GRE
+<img width="799" height="52" alt="image" src="https://github.com/user-attachments/assets/6fe30b3b-9d09-4bf9-862c-a72c1b475f82" />
+Перезапускаем службу сети
+<img width="955" height="536" alt="image" src="https://github.com/user-attachments/assets/c74f2ed8-3e42-4a28-85d1-d08765de5368" />
+Проверяем, что gre0 перешел в статус UNKNOWN и tun1 приобрел IP-адрес
+<img width="926" height="114" alt="image" src="https://github.com/user-attachments/assets/401cd773-e1a6-4441-8d76-a3aecda20096" />
+Изменяем TTL интерфейса GRE на 64
+<img width="982" height="40" alt="image" src="https://github.com/user-attachments/assets/f3e93f9f-63bf-45c7-b92b-011bdfd56851" />
+Если тут вылезает ошибка, проверьте внимательно nmtui, не должно стоять поcле gre пробела 
+Попробуем пингануть с BR-RTR HQ-RTR по IP-адресу 10.10.0.1
+<img width="800" height="268" alt="image" src="https://github.com/user-attachments/assets/fb8a3e03-13b6-4dc1-b124-9925183d8fce" />
+Попробуем пингануть с HQ-RTR BR-RTR по IP-адресу 10.10.0.2
+<img width="877" height="275" alt="image" src="https://github.com/user-attachments/assets/58156b0d-53ab-4955-936f-556b37783eef" />
 
+7.	Обеспечьте динамическую маршрутизацию на маршрутизаторах HQ-RTR и BR-RTR: сети одного офиса должны быть доступны из другого офиса и наоборот. Для обеспечения динамической маршрутизации используйте link state протокол на усмотрение участника:
+•	Разрешите выбранный протокол только на интерфейсах ip туннеля
+•	Маршрутизаторы должны делиться маршрутами только друг с другом
+•	Обеспечьте защиту выбранного протокола посредством парольной защиты
+•	Сведения о настройке и защите протокола занесите в отчёт.
+Устанавливаем FRR на HQ-RTR и BR-RTR
+<img width="555" height="35" alt="image" src="https://github.com/user-attachments/assets/1b7a59c8-02dd-4235-83d4-72cde14bb1b4" />
+<img width="555" height="39" alt="image" src="https://github.com/user-attachments/assets/502e1f9e-8ead-4eca-b6a0-385d9dcefb76" />
+Сначала настроим HQ-RTR
+Зайдем в конфигурационный файл модулей FRR
+<img width="709" height="47" alt="image" src="https://github.com/user-attachments/assets/e8e334dc-2807-4f7a-91d4-31cd573ecd87" />
+Ищем строчку ospfd=no и меняем на ospfd=yes
+<img width="460" height="591" alt="image" src="https://github.com/user-attachments/assets/a44567d0-ed10-432a-a5b8-06de0df223f7" />
+Перезапускаем FRR
+<img width="664" height="37" alt="image" src="https://github.com/user-attachments/assets/dbe63eaf-c987-4ca8-b526-bc7ba1461ebe" />
+Входим в эмуляцию интерфейса FRR (аналог Cisco)
+<img width="424" height="41" alt="image" src="https://github.com/user-attachments/assets/487b7267-12fe-436e-b26c-4dc09a171fa6" />
+Входим в режим конфигурации терминала
+<img width="519" height="47" alt="image" src="https://github.com/user-attachments/assets/e14c3a79-1cee-4892-8587-82ef95273046" />
+Входим в режим конфигурации OSPF
+<img width="736" height="44" alt="image" src="https://github.com/user-attachments/assets/27969d45-7bdd-415c-b125-7ced80f72a31" />
+Задаем ID для маршрутизатора (1.1.1.1)
+<img width="968" height="44" alt="image" src="https://github.com/user-attachments/assets/8959eb93-28e4-46a6-9357-4d7de3d50cf1" />
+<img width="977" height="38" alt="image" src="https://github.com/user-attachments/assets/c35c7b18-3835-4bd5-8968-d9cfa10377b1" />
+Объявляем локальные сети офиса HQ (сеть VLAN100 и VLAN200) и сеть
+GRE-туннеля
+<img width="972" height="83" alt="image" src="https://github.com/user-attachments/assets/ecadc619-b32c-46ea-9f27-6e4cbe143987" />
+Настройка аутентификации для области
+<img width="965" height="43" alt="image" src="https://github.com/user-attachments/assets/02ab31cf-a63f-44a5-9d16-ee8577c33898" />
+Переходим к конфигурированию интерфейса tun1
+<img width="795" height="39" alt="image" src="https://github.com/user-attachments/assets/994e7a0f-5826-450b-ac9a-144763e68d94" />
+Выводим интерфейс из пассивного режима
+<img width="905" height="34" alt="image" src="https://github.com/user-attachments/assets/522d1736-9ffe-449d-ba6d-e10513376278" />
+Туннельный интерфейс tun1 делаем активным, для установления соседства с
+BR-RTR и обмена внутренними маршрутами
+<img width="975" height="40" alt="image" src="https://github.com/user-attachments/assets/506d7a61-b5e7-4315-a855-067001965020" />
+Настройка аутентификации с открытым паролем password
+<img width="967" height="57" alt="image" src="https://github.com/user-attachments/assets/490eb586-b4ca-4566-ba2c-2fcebfe38739" />
+Выходим и записываем изменения
+<img width="944" height="236" alt="image" src="https://github.com/user-attachments/assets/297b6b77-8c59-4464-ae2b-bb38b69039aa" />
+Настроим BR-RTR
+Зайдем в конфигурационный файл модулей FRR
+<img width="649" height="47" alt="image" src="https://github.com/user-attachments/assets/601e735f-1a6a-4b53-b7e7-65912f740347" />
+Ищем строчку ospfd=no и меняем на ospfd=yes
+<img width="680" height="44" alt="image" src="https://github.com/user-attachments/assets/0525faa6-d111-44a1-82b0-47f599278da4" />
+Перезапускаем FRR
+<img width="806" height="771" alt="image" src="https://github.com/user-attachments/assets/722ceaa5-b8be-4ce8-bfd5-c58242c128f1" />
+Входим в эмуляцию интерфейса FRR (аналог Cisco)
+<img width="385" height="36" alt="image" src="https://github.com/user-attachments/assets/f2cf0116-d50f-48fb-b7a3-df0ae7afcaf3" />
+Входим в режим конфигурации терминала
+<img width="516" height="55" alt="image" src="https://github.com/user-attachments/assets/980882e9-c231-4b5c-90f0-cdc30ef0d2c5" />
+Входим в режим конфигурации OSPF
+<img width="744" height="41" alt="image" src="https://github.com/user-attachments/assets/9e003cb5-1944-4652-8a35-b2f1b7fd36e7" />
+Задаем ID для маршрутизатора (2.2.2.2)
+<img width="975" height="39" alt="image" src="https://github.com/user-attachments/assets/7cfbbbb8-607e-4259-9b32-dd35126b3ca5" />
+<img width="973" height="45" alt="image" src="https://github.com/user-attachments/assets/d15216de-87ea-4060-a863-19c2b6a4250d" />
+Объявляем локальную сеть офиса BR и сеть GRE-туннеля
+<img width="970" height="56" alt="image" src="https://github.com/user-attachments/assets/ead7a690-7dc6-4d4b-b55f-2e66ae7b30a4" />
+Настройка аутентификации для области
+<img width="966" height="43" alt="image" src="https://github.com/user-attachments/assets/77840ce2-c694-4ca8-9a5f-41f16336fb9f" />
+Переходим к конфигурированию интерфейса tun1
+<img width="805" height="36" alt="image" src="https://github.com/user-attachments/assets/ef8c5695-11eb-44c0-92ae-c88d1f6933cd" />
+Выводим интерфейс из пассивного режима
+<img width="911" height="38" alt="image" src="https://github.com/user-attachments/assets/14df734f-ed84-4a65-b861-d8858341c9cd" />
+Туннельный интерфейс tun1 делаем активным, для установления соседства с
+HQ-RTR и обмена внутренними маршрутами
+<img width="968" height="40" alt="image" src="https://github.com/user-attachments/assets/34f9935e-5813-4014-a0c9-45f1e3b62466" />
+Настройка аутентификации с открытым паролем password
+<img width="953" height="62" alt="image" src="https://github.com/user-attachments/assets/f3edccda-7a2f-4b6f-8a6e-8fa7b410e1b2" />
+Выходим и записываем изменения
+<img width="975" height="238" alt="image" src="https://github.com/user-attachments/assets/04622e72-8e3f-4216-80e0-8cce27a6afbb" />
+После этого перезагружаем HQ-RTR и BR-RTR
+<img width="422" height="51" alt="image" src="https://github.com/user-attachments/assets/b0122746-d8df-48dd-9b11-6d86cdd2233b" />
+<img width="406" height="53" alt="image" src="https://github.com/user-attachments/assets/714a08dd-ea3e-4436-bd22-82d4fba1f3af" />
+Входим в эмуляцию интерфейса FRR
+<img width="392" height="47" alt="image" src="https://github.com/user-attachments/assets/d5ddd5d8-543e-4761-a662-8a50293d443d" />
+<img width="392" height="63" alt="image" src="https://github.com/user-attachments/assets/b02953d6-4b86-4e77-ab0b-69810d66b773" />
+Проверяем соседство маршрутизаторов
+<img width="978" height="159" alt="image" src="https://github.com/user-attachments/assets/5b054ada-b3df-49e5-8215-0c6bc0eeff34" />
+<img width="977" height="171" alt="image" src="https://github.com/user-attachments/assets/b253557c-6ba6-4382-bbbc-1478f355cabc" />
+Все работает, можно с HQ-SRV пингануть BR-SRV
+ЕСЛИ СЕРВЕРА НЕ ВИДЯТ ДРУГ ДРУГА, ТО ПРОПИСЫВАЕМ НА HQ-RTR И BR-RTR systemctl restart frr
+<img width="763" height="250" alt="image" src="https://github.com/user-attachments/assets/efffa0b4-6f6b-456a-a486-8aacc8360236" />
 
+9.	Настройте протокол динамической конфигурации хостов для сети в сторону HQ-CLI:
+•	Настройте нужную подсеть
+•	В качестве сервера DHCP выступает маршрутизатор HQ-RTR
+•	Клиентом является машина HQ-CLI
+•	Исключите из выдачи адрес маршрутизатора
+•	Адрес шлюза по умолчанию – адрес маршрутизатора HQ-RTR
+•	Адрес DNS-сервера для машины HQ-CLI – адрес сервера HQ-SRV
+•	DNS-суффикс – au-team.irpo
+•	Сведения о настройке протокола занесите в отчёт.
+Установим DHCP-сервер на HQ-RTR
+<img width="778" height="36" alt="image" src="https://github.com/user-attachments/assets/dbdd97e8-eaef-4eff-8797-eb0072ae0d68" />
+Зайдем в настройки интерфейсов DHCP
+<img width="863" height="45" alt="image" src="https://github.com/user-attachments/assets/6022b345-73d1-4865-9b9b-a5daa18c8cec" />
+Вписываем в INTERFACESv4 значение vlan200 (это HQ-CLI)
+<img width="494" height="232" alt="image" src="https://github.com/user-attachments/assets/c50a0784-ab99-4090-996e-d7e0344c209a" />
+Настроим сам DHCP
+<img width="681" height="38" alt="image" src="https://github.com/user-attachments/assets/14ec6d88-1ff7-44e4-bba9-db913ce37f7d" />
+<img width="975" height="647" alt="image" src="https://github.com/user-attachments/assets/e8bd8e39-4da1-4ce8-9cd8-0f8ac16644de" />
+Нужно изменить эти две строчки
+<img width="970" height="96" alt="image" src="https://github.com/user-attachments/assets/b4b8c521-861a-4723-92c8-9225780fa346" />
+На
+<img width="917" height="128" alt="image" src="https://github.com/user-attachments/assets/790cdbe4-f80b-4950-a978-4ecfe9942e04" />
+Перемещаемся к концу файла
+<img width="911" height="342" alt="image" src="https://github.com/user-attachments/assets/31e2ea3d-8e00-4230-9ed2-67f0b415fab4" />
+Добавляем в конец настройку DHCP
+<img width="975" height="703" alt="image" src="https://github.com/user-attachments/assets/504a3499-fb6e-4f79-93e2-f81b3b913240" />
+Тут 2 пробела перед range и option
+•	subnet - обозначает сеть, в области которой будет работать данная группа настроек;
+•	range — диапазон, из которого будут браться IP-адреса;
+•	option domain-name-servers — через запятую перечисляем DNS-сервера.
+•	option domain-name — суффикс доменного имени
+•	option routers — шлюз по умолчанию;
+•	default-lease-time, max-lease-time — время и максимальное время в секундах, на которое клиент получит адрес, по его истечению будет выполнено продление срока
+То есть, по сути наш DHCP будет работать в области 192.168.100.32 с маской 255.255.255.240 (/28), выдавать диапазоны адресов от 192.168.100.34 до 192.168.100.47 от нашего шлюза VLAN200 (192.168.100.33).
+Перезагружаем службу DHCP
+<img width="875" height="41" alt="image" src="https://github.com/user-attachments/assets/4c694f67-3157-4b0d-bddf-b42b78835e72" />
+Теперь на HQ-CLI изменим файл /etc/network/interfaces
+<img width="797" height="36" alt="image" src="https://github.com/user-attachments/assets/e237b685-e8fa-4cfe-9f7c-2e9f9e05fe95" />
+Меняем настройку со статики
+<img width="438" height="423" alt="image" src="https://github.com/user-attachments/assets/c306ba56-ef89-49ef-ab14-8261a085756f" />
+На DHCP
+<img width="487" height="365" alt="image" src="https://github.com/user-attachments/assets/be64385e-767c-4283-bb02-a750da42ca8a" />
+P.S. В nmtui рекомендую удалить Wired connection 1, иначе интерфейс получит два IP-адреса
+<img width="974" height="559" alt="image" src="https://github.com/user-attachments/assets/297e3a90-f32b-4373-b663-b2b3b35a87df" />
+<img width="975" height="96" alt="image" src="https://github.com/user-attachments/assets/350760e8-bd29-4e90-a6e2-b73be3365dd0" />
+Перезапускаем службу сети
+<img width="814" height="44" alt="image" src="https://github.com/user-attachments/assets/24d2d012-a880-4dab-818d-d8556f32fce4" />
+Проверяем выдачу IP-адреса
+<img width="881" height="105" alt="image" src="https://github.com/user-attachments/assets/1847608d-83f0-441d-9e5e-3f2bb93a635f" />
+Может	выдаться	и	192.168.100.35	(это	если	забыть	удалить	из	nmtui
+подключение), но ничего страшного
+<img width="866" height="102" alt="image" src="https://github.com/user-attachments/assets/7963c386-b4a6-450a-9f93-5a8f979037ff" />
 
+10.	Настройте инфраструктуру разрешения доменных имён для офисов HQ и BR:
+•	Основной DNS-сервер реализован на HQ-SRV
+•	Сервер	должен	обеспечивать	разрешение	имён	в	сетевые	адреса устройств и обратно в соответствии с таблицей 3
+•	В качестве DNS сервера пересылки используйте любой общедоступный DNS сервер(77.88.8.7, 77.88.8.3 или другие)
+МОЖЕТ ВЫЛЕЗТИ ОШИБКА ПРИ СКАЧИВАНИИ dnsmasq, ЕСЛИ ЭТО ПРОИЗОЙДЕТ, ПИШЕМ sudo apt-get update
+Заходим на HQ-SRV, скачиваем DNS-сервер
+1. apt install dnsmasq -y
+2. nano /etc/dnsmasq.conf
+3. Конфигурируем как на скриншоте, в начале или конце файла
+<img width="1006" height="757" alt="image" src="https://github.com/user-attachments/assets/009df4dc-d6db-4e40-8101-92fa4e5abbe0" />
+4. nano /etc/resolv.conf
+5. В resolv записываем nameserver 127.0.0.1
+6. Проверяем интернет с разрешением DNS ping ya.ru
+7. Проверяем ping br-rtr.au-team.irpo и прочие хосты
+Если пингуется, значит DNS преобразуется в IP и все работает
 
+11.	Настройте часовой пояс на всех устройствах (за исключением виртуального коммутатора, в случае его использования) согласно месту проведения экзамена
+Проверяем часовой пояс.
+<img width="975" height="271" alt="image" src="https://github.com/user-attachments/assets/7f023772-bfc3-4080-90d5-9eb8232498cd" />
+Список доступных часовых поясов можно посмотреть командой.
+<img width="977" height="153" alt="image" src="https://github.com/user-attachments/assets/1a06d966-7860-46b0-b891-2b1ae86eb8ac" />
+Посмотреть список регионов и городов.
+<img width="975" height="394" alt="image" src="https://github.com/user-attachments/assets/f777b200-daa3-4f63-ad2d-c02e5ef9f0a7" />
+Выберем Красноярск.
+<img width="955" height="53" alt="image" src="https://github.com/user-attachments/assets/202d03e9-351e-401b-8e84-7aa06256c934" />
+Изменение даты и времени при необходимости.
+<img width="937" height="42" alt="image" src="https://github.com/user-attachments/assets/3c7cb7e1-aabb-4571-9878-6d4d22cc50be" />
+Проверяем изменения.
+<img width="944" height="240" alt="image" src="https://github.com/user-attachments/assets/fde8ecfd-828b-46c3-9e7b-a66cf5e2bdb9" />
+Повторяем задание 11 на всех устройствах – ISP, HQ-RTR, BR-RTR, HQ-SRV, HQ-CLI, BR-SRV.
