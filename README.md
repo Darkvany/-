@@ -122,7 +122,7 @@ HQ-RTR и BR-RTR:
 <img width="695" height="34" alt="image" src="https://github.com/user-attachments/assets/c6db7d34-6e7d-454b-90f8-5a77133c0fd0" />
 На HQ-RTR:
 <img width="821" height="46" alt="image" src="https://github.com/user-attachments/assets/44365661-c453-4fc8-ab1e-efd0621c52ad" />
-<img width="821" height="46" alt="image" src="https://github.com/user-attachments/assets/0301b322-f501-4471-82dc-89597b3d8206" />
+рпрпрпрпрпрпрпппппапоаноьвр6орвтикер6тни
 •	gateway 172.16.1.1 – указание шлюза (IP-адрес предыдущего устройства, к которому подключено устройство по сети. В нашем случае это ISP.)
 Выходим с файла: Ctrl+X, y, Enter.
 Перезагружаем службу сети
