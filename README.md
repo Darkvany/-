@@ -247,9 +247,9 @@ BR-SRV:
 <img width="749" height="36" alt="image" src="https://github.com/user-attachments/assets/f5f15f54-0914-439e-aad8-92606409cb83" />
 <img width="955" height="716" alt="image" src="https://github.com/user-attachments/assets/9313bbe0-44ea-418e-8698-63136a977722" />
 Раскомментируем строчку Port 22, и изменим порт на 2026
-<img width="391" height="143" alt="image" src="https://github.com/user-attachments/assets/7bbc8edb-f8df-41ad-b7f6-2f340eccfee2" />
-Разрешим вход только пользователем sshuser
 <img width="908" height="804" alt="image" src="https://github.com/user-attachments/assets/02598e58-3327-4e6c-a98e-11216ba09494" />
+Разрешим вход только пользователем sshuser
+<img width="391" height="143" alt="image" src="https://github.com/user-attachments/assets/7bbc8edb-f8df-41ad-b7f6-2f340eccfee2" />
 Ограничиваем на две попытки входа
 <img width="403" height="131" alt="image" src="https://github.com/user-attachments/assets/cbb0403b-e030-4207-af91-2e236c563e88" />
 Зададим также баннер
