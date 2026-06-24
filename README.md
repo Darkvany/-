@@ -374,9 +374,9 @@ BR-RTR и обмена внутренними маршрутами
 Зайдем в конфигурационный файл модулей FRR
 <img width="649" height="47" alt="image" src="https://github.com/user-attachments/assets/601e735f-1a6a-4b53-b7e7-65912f740347" />
 Ищем строчку ospfd=no и меняем на ospfd=yes
-<img width="680" height="44" alt="image" src="https://github.com/user-attachments/assets/0525faa6-d111-44a1-82b0-47f599278da4" />
-Перезапускаем FRR
 <img width="806" height="771" alt="image" src="https://github.com/user-attachments/assets/722ceaa5-b8be-4ce8-bfd5-c58242c128f1" />
+Перезапускаем FRR
+<img width="680" height="44" alt="image" src="https://github.com/user-attachments/assets/0525faa6-d111-44a1-82b0-47f599278da4" />
 Входим в эмуляцию интерфейса FRR (аналог Cisco)
 <img width="385" height="36" alt="image" src="https://github.com/user-attachments/assets/f2cf0116-d50f-48fb-b7a3-df0ae7afcaf3" />
 Входим в режим конфигурации терминала
