@@ -218,10 +218,10 @@ userdel имя пользователя
 <img width="397" height="47" alt="image" src="https://github.com/user-attachments/assets/ca1bfd79-629b-47a8-be11-8dee4d3500d2" />
 И на HQ-RTR и на BR-RTR ОБЯЗАТЕЛЬНО в конце файла visudo
 добавляем строчку
-
-
+<img width="731" height="43" alt="image" src="https://github.com/user-attachments/assets/7ad69d0d-91ba-49db-8877-4091f1ab21cd" />
+<img width="786" height="811" alt="image" src="https://github.com/user-attachments/assets/5ca8a12d-4f21-4b04-8ded-2215f11f89b2" />
 Также все работает без пароля
-
+<img width="560" height="159" alt="image" src="https://github.com/user-attachments/assets/38f9183c-0990-48d0-93e1-0df15cce26fe" />
 
 4.	Настройте коммутацию в сегменте HQ следующим образом:
 •	Трафик HQ-SRV должен принадлежать VLAN 100
@@ -230,3 +230,39 @@ userdel имя пользователя
 •	Реализовать на HQ-RTR маршрутизацию трафика всех указанных VLAN с использованием одного сетевого адаптера ВМ/физического порта
 •	Сведения о настройке коммутации внесите в отчёт На HQ-RTR установим OpenvSwitch:
 •	Если не скачивается, выдает Игн:... Проверяем интернет.
+<img width="975" height="632" alt="image" src="https://github.com/user-attachments/assets/08aeb68c-ce23-41e2-958f-cc1c85bcde98" />
+Создаем мост на виртуальном коммутаторе
+<img width="683" height="45" alt="image" src="https://github.com/user-attachments/assets/0a18af18-5055-4bde-9e6c-194b943cfc7f" />
+Добавляем физические интерфейсы на виртуальный коммутатор с тегами
+<img width="888" height="101" alt="image" src="https://github.com/user-attachments/assets/437fdd82-5b42-4c22-8253-f6f0a60d431a" />
+Добавляем VLAN-интерфейсы
+<img width="975" height="142" alt="image" src="https://github.com/user-attachments/assets/f2f4c0f6-c4b9-4be0-bd96-70a4fd17626f" />
+Отредактируем файл /etc/network/interfaces. В нем нужно будет поднять
+VLAN-интерфейсы, назначить им IP-адреса, а также поднять мост
+<img width="792" height="41" alt="image" src="https://github.com/user-attachments/assets/cf3a44fd-3437-476b-bdf2-972fe7da2e4a" />
+Модифицируем файл таким образом:
+<img width="794" height="46" alt="image" src="https://github.com/user-attachments/assets/39209748-a35e-4ea1-98b8-c0f64e4976fe" />
+Перезагружаем сеть
+<img width="805" height="984" alt="image" src="https://github.com/user-attachments/assets/ac6656b3-1865-4c2c-94cc-a7acc1126b3c" />
+Проверяем адресацию
+<img width="974" height="261" alt="image" src="https://github.com/user-attachments/assets/fa4919e7-8936-459c-bc15-f22ab8ffe35b" />
+Теперь попробуем пингануть HQ-SRV и HQ-CLI с HQ-RTR
+<img width="975" height="444" alt="image" src="https://github.com/user-attachments/assets/f1d72d24-b97c-40e8-b5a3-d06df8d261a7" />
+Также на HQ-SRV и на HQ-CLI теперь появился интернет
+<img width="937" height="267" alt="image" src="https://github.com/user-attachments/assets/001f6b43-8b77-455c-be6d-77242dbcfdc0" />
+
+5.	Настройте безопасный удаленный доступ на серверах HQ-SRV и
+BR-SRV:
+•	Для подключения используйте порт 2026
+•	Разрешите подключения исключительно пользователю sshuser
+•	Ограничьте количество попыток входа до двух
+•	Настройте баннер «Authorized access only».
+Устанавливаем SSH-сервер на HQ-SRV и BR-SRV
+<img width="778" height="43" alt="image" src="https://github.com/user-attachments/assets/31854ce4-1185-406b-b13c-0f50d0204565" />
+
+Редактируем конфигурацию
+
+
+
+
+
