@@ -134,9 +134,9 @@ HQ-RTR и BR-RTR:
 <img width="952" height="72" alt="image" src="https://github.com/user-attachments/assets/63b462da-0f61-4cb4-b127-57e813c6cbca" />
 На HQ-CLI (временно, до 9 задания, позже он IP будет получать по DHCP):
 <img width="805" height="46" alt="image" src="https://github.com/user-attachments/assets/8c8927a8-1b59-4861-a2b3-bdd43f7d8279" />
-<img width="803" height="44" alt="image" src="https://github.com/user-attachments/assets/cff04ba5-b1b3-4d9b-ad54-32c1722b931b" />
-Перезагружаем службу сети
 <img width="700" height="814" alt="image" src="https://github.com/user-attachments/assets/fae20a9c-8bed-4e90-8ba6-4506b53dbb1f" />
+Перезагружаем службу сети
+<img width="803" height="44" alt="image" src="https://github.com/user-attachments/assets/cff04ba5-b1b3-4d9b-ad54-32c1722b931b" />
 Проверяем IP-адреса
 <img width="954" height="74" alt="image" src="https://github.com/user-attachments/assets/24d24a81-fe42-4188-9087-38900c4f35c5" />
 На BR-SRV:
