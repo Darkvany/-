@@ -288,13 +288,13 @@ RTR необходимо сконфигурировать ip туннель:
 •	Задаём «Удаленный IP» (IP на интерфейсе BR-RTR в сторону ISP 172.16.2.2)
 •	Переходим к «КОНФИГУРАЦИЯ IPv4», переключаем на «Вручную»
 •	Задаём адрес IPv4 для туннеля (10.10.0.1/30)
-<img width="806" height="42" alt="image" src="https://github.com/user-attachments/assets/47cad913-2157-4a68-9a46-f27f369c9038" />
 <img width="780" height="611" alt="image" src="https://github.com/user-attachments/assets/b25274c0-3c1d-4e73-97ca-0b15db912e96" />
+<img width="975" height="753" alt="image" src="https://github.com/user-attachments/assets/89baf958-1c03-4cfa-ae5a-ca4c27b50848" />
 Выходим
 Заходим в файл /etc/network/interfaces
-<img width="531" height="83" alt="image" src="https://github.com/user-attachments/assets/2e6eb6e5-49e7-4955-90f1-0c7c76b1ec95" />
+<img width="806" height="42" alt="image" src="https://github.com/user-attachments/assets/47cad913-2157-4a68-9a46-f27f369c9038" />
 В самом конце файла добавляем строчку для поднятия интерфейса GRE
-<img width="975" height="753" alt="image" src="https://github.com/user-attachments/assets/89baf958-1c03-4cfa-ae5a-ca4c27b50848" />
+<img width="531" height="83" alt="image" src="https://github.com/user-attachments/assets/2e6eb6e5-49e7-4955-90f1-0c7c76b1ec95" />
 Перезапускаем службу сети
 <img width="775" height="37" alt="image" src="https://github.com/user-attachments/assets/9c2dbc98-a632-4ecc-a315-f90c144d6f12" />
 Проверяем, что gre0 перешел в статус UNKNOWN и tun1 приобрел IP-адрес
@@ -330,7 +330,7 @@ RTR необходимо сконфигурировать ip туннель:
 Попробуем пингануть с HQ-RTR BR-RTR по IP-адресу 10.10.0.2
 <img width="877" height="275" alt="image" src="https://github.com/user-attachments/assets/58156b0d-53ab-4955-936f-556b37783eef" />
 
-7.	Обеспечьте динамическую маршрутизацию на маршрутизаторах HQ-RTR и BR-RTR: сети одного офиса должны быть доступны из другого офиса и наоборот. Для обеспечения динамической маршрутизации используйте link state протокол на усмотрение участника:
+8.	Обеспечьте динамическую маршрутизацию на маршрутизаторах HQ-RTR и BR-RTR: сети одного офиса должны быть доступны из другого офиса и наоборот. Для обеспечения динамической маршрутизации используйте link state протокол на усмотрение участника:
 •	Разрешите выбранный протокол только на интерфейсах ip туннеля
 •	Маршрутизаторы должны делиться маршрутами только друг с другом
 •	Обеспечьте защиту выбранного протокола посредством парольной защиты
