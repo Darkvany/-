@@ -1,3 +1,7 @@
-sed -i 's/^;max_input_vars =.*/max_input_vars = 5000/' /etc/php/8.4/apache2/php.ini
-sed -i 's/^max_input_vars =.*/max_input_vars = 5000/' /etc/php/8.4/apache2/php.ini
-grep "max_input_vars" /etc/php/8.4/apache2/php.ini
+tar -xvzf moodle-4.4.tgz
+mv moodle /var/www/html/
+chown -R www-data:www-data /var/www/html/moodle
+cd
+
+mariadb -e "DROP DATABASE moodle;"
+mariadb -e "CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
