@@ -1,7 +1,1 @@
-tar -xvzf moodle-4.4.tgz
-mv moodle /var/www/html/
-chown -R www-data:www-data /var/www/html/moodle
-cd
-
-mariadb -e "DROP DATABASE moodle;"
-mariadb -e "CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+apt install apache2 mariadb-server php php-cli php-common php-gd php-curl php-intl php-zip php-mbstring php-soap php-ldap php-bcmath php-xml php-mysql unzip -y
