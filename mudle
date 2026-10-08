@@ -1,10 +1,2 @@
-wget https://download.moodle.org/download.php/direct/stable404/moodle-4.4.tgz
-tar -xvzf moodle-4.4.tgz
-
-mv moodle /var/www/html/
-
-mkdir /var/www/moodledata
-
-chown -R www-data:www-data /var/www/html/moodle
-chown -R www-data:www-data /var/www/moodledata
-chmod -R 777 /var/www/moodledata
+sed -i 's/^;max_input_vars =.*/max_input_vars = 5000/' /etc/php/8.4/apache2/php.ini
+sed -i 's/^max_input_vars =.*/max_input_vars = 5000/' /etc/php/8.4/apache2/php.ini
