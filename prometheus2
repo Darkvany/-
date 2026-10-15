@@ -1,17 +1,19 @@
-[Unit]
-Description=Alertmanager
-Wants=network-online.target
-After=network-online.target
+groups:
+  - name: node-basic
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Инстанс {{ $labels.instance }} недоступен"
+          description: "{{ $labels.job }} target упал более 1 минуты."
 
-[Service]
-User=alertmanager
-Group=alertmanager
-Type=simple
-Restart=on-failure
-ExecStart=/usr/local/bin/alertmanager \
-  --config.file=/etc/alertmanager/alertmanager.yml \
-  --storage.path=/var/lib/alertmanager/ \
-  --web.listen-address=0.0.0.0:9093
-
-[Install]
-WantedBy=multi-user.target
+      - alert: HighCPU
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Высокая загрузка CPU на {{ $labels.instance }}"
