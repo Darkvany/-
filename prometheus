@@ -1,8 +1,19 @@
 cd /tmp
-wget https://download.moodle.org/download.php/direct/stable405/moodle-latest-405.tgz
-tar -xzf moodle-latest-405.tgz -C /var/www/html/
-mv /var/www/html/moodle /var/www/html/moodle-site
-mkdir -p /var/www/moodledata
-chown -R www-data:www-data /var/www/html/moodle-site /var/www/moodledata
-chmod -R 755 /var/www/html/moodle-site
-chmod -R 770 /var/www/moodledata
+rm -f moodle-*.tar.gz
+
+for br in MOODLE_502_STABLE MOODLE_501_STABLE MOODLE_500_STABLE MOODLE_405_STABLE; do
+  url="https://github.com/moodle/moodle/archive/refs/heads/${br}.tar.gz"
+  echo "==> Пробую $br ..."
+  if curl -fL --progress-bar -o "moodle-${br}.tar.gz" "$url"; then
+    sz=$(stat -c%s "moodle-${br}.tar.gz")
+    if [ "$sz" -gt 50000000 ]; then
+      echo "=== OK: $br скачалась, $(du -h moodle-${br}.tar.gz | cut -f1) ==="
+      break
+    else
+      echo "    файл слишком маленький ($sz байт), пропускаю"
+      rm -f "moodle-${br}.tar.gz"
+    fi
+  fi
+done
+
+ls -lh /tmp/moodle-*.tar.gz
