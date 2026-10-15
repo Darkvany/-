@@ -1,25 +1,19 @@
-global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
-  external_labels:
-    monitor: 'pnetlab-monitor'
-
-alerting:
-  alertmanagers:
-    - static_configs:
-        - targets:
-            - localhost:9093
-
-rule_files:
-  - "/etc/prometheus/rules/*.yml"
-
-scrape_configs:
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name: 'node'
-    static_configs:
-      - targets: ['localhost:9100']
+groups:
+  - name: node-basic
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 1m
         labels:
-          instance: 'monitoring-server'
+          severity: critical
+        annotations:
+          summary: "Инстанс {{ $labels.instance }} недоступен"
+          description: "{{ $labels.job }} target упал более 1 минуты."
+
+      - alert: HighCPU
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Высокая загрузка CPU на {{ $labels.instance }}"
