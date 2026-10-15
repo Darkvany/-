@@ -1,12 +1,132 @@
-root@debian:~# tail -n 100 /var/www/nextcloud/data/nextcloud.log
-{"reqId":"TxYwLdWDnBADOFzf0kST","level":2,"time":"2026-10-15T04:45:32+00:00","remoteAddr":"10.0.137.129","user":"--","app":"PHP","method":"POST","url":"/","scriptName":"/index.php","message":"Undefined array key \"passwordsalt\" at /var/www/nextcloud/lib/private/Setup.php#375","userAgent":"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","version":"","data":{"app":"PHP"}}
-{"reqId":"TxYwLdWDnBADOFzf0kST","level":2,"time":"2026-10-15T04:45:32+00:00","remoteAddr":"10.0.137.129","user":"--","app":"PHP","method":"POST","url":"/","scriptName":"/index.php","message":"Undefined array key \"secret\" at /var/www/nextcloud/lib/private/Setup.php#376","userAgent":"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","version":"","data":{"app":"PHP"}}
-root@debian:~# php -v
-PHP 8.4.26 (cli) (built: Sep 24 2026 17:16:18) (NTS)
-Copyright (c) The PHP Group
-Built by Debian
-Zend Engine v4.4.26, Copyright (c) Zend Technologies
-    with Zend OPcache v8.4.26, Copyright (c), by Zend Technologies
-root@debian:~# ls /etc/php/
-8.4
+root@debian:~# php -m
+[PHP Modules]
+bcmath
+calendar
+Core
+ctype
+curl
+date
+dom
+exif
+FFI
+fileinfo
+filter
+ftp
+gd
+gettext
+gmp
+hash
+iconv
+imagick
+intl
+json
+libxml
+mbstring
+mysqli
+mysqlnd
+openssl
+pcntl
+pcre
+PDO
+pdo_mysql
+Phar
+posix
+random
+readline
+Reflection
+session
+shmop
+SimpleXML
+sockets
+sodium
+SPL
+standard
+sysvmsg
+sysvsem
+sysvshm
+tokenizer
+xml
+xmlreader
+xmlwriter
+xsl
+Zend OPcache
+zip
+zlib
+
+[Zend Modules]
+Zend OPcache
+
+root@debian:~# apache2ctl -M | grep php
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+ php_module (shared)
+root@debian:~# sudo -u www-data php /var/www/nextcloud/occ app:list
+Enabled:
+  - activity: 8.0.0
+  - app_api: 35.0.0
+  - appstore: 2.0.0-dev.0
+  - bruteforcesettings: 8.0.0
+  - circles: 35.0.0
+  - cloud_federation_api: 2.0.0-dev.0
+  - comments: 2.0.0-dev.0
+  - contactsinteraction: 2.0.0-dev.0
+  - dashboard: 8.0.0-dev.0
+  - dav: 2.0.0-dev.1
+  - federatedfilesharing: 2.0.0-dev.1
+  - federation: 2.0.0-dev.0
+  - files: 3.0.0-dev.0
+  - files_downloadlimit: 5.3.0
+  - files_lock: 35.0.0
+  - files_pdfviewer: 8.0.0
+  - files_reminders: 2.0.0-dev.0
+  - files_sharing: 2.0.0-dev.1
+  - files_trashbin: 2.0.0-dev.0
+  - files_versions: 2.0.0-dev.0
+  - firstrunwizard: 8.0.0
+  - logreader: 8.0.0
+  - lookup_server_connector: 2.0.0-dev.0
+  - nextcloud_announcements: 7.0.0
+  - notifications: 8.0.0
+  - oauth2: 2.0.0-dev.0
+  - office: 1.1.0
+  - password_policy: 7.0.0
+  - photos: 8.0.0
+  - privacy: 7.0.0
+  - profile: 2.0.0-dev.0
+  - provisioning_api: 2.0.0-dev.0
+  - recommendations: 8.0.0
+  - related_resources: 6.0.0
+  - serverinfo: 7.0.0
+  - settings: 2.0.0-dev.0
+  - sharebymail: 2.0.0-dev.0
+  - sharing: 1.0.4
+  - support: 7.0.0
+  - survey_client: 7.0.0
+  - systemtags: 2.0.0-dev.0
+  - text: 9.0.0
+  - theming: 3.0.0-dev.0
+  - twofactor_backupcodes: 2.0.0-dev.0
+  - twofactor_totp: 17.1.0
+  - updatenotification: 2.0.0-dev.0
+  - user_status: 2.0.0-dev.0
+  - viewer: 8.0.0
+  - weather_status: 2.0.0-dev.0
+  - webhook_listeners: 2.0.0-dev.0
+  - workflowengine: 3.0.0-dev.0
+Disabled:
+  - admin_audit: 2.0.0-dev.0
+  - encryption: 3.0.0-dev.0
+  - files_external: 2.0.0-dev.0
+  - suspicious_login: 13.0.0
+  - twofactor_nextcloud_notification: 9.0.0
+  - user_ldap: 2.0.0-dev.0
+root@debian:~# sudo -u www-data php /var/www/nextcloud/occ config:system:get appstoreenabled
+root@debian:~# tail -n 50 /var/log/apache2/nextcloud_error.log
+[Thu Oct 15 07:46:48.180643 2026] [php:error] [pid 17843:tid 17843] [client 10.0.137.129:55254] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /var/www/nextcloud/lib/private/App/AppStore/Fetcher/Fetcher.php on line 111
+[Thu Oct 15 07:46:48.183825 2026] [php:error] [pid 17843:tid 17843] [client 10.0.137.129:55254] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 65536 bytes) in /var/www/nextcloud/3rdparty/nextcloud/lognormalizer/src/Normalizer.php on line 69
+[Thu Oct 15 07:55:44.534957 2026] [php:error] [pid 18027:tid 18027] [client 10.0.137.129:54684] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /var/www/nextcloud/lib/private/App/AppStore/Fetcher/Fetcher.php on line 111
+[Thu Oct 15 07:55:44.536081 2026] [php:error] [pid 18027:tid 18027] [client 10.0.137.129:54684] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /var/www/nextcloud/lib/composer/composer/ClassLoader.php on line 576
+[Thu Oct 15 08:05:33.728228 2026] [php:error] [pid 18031:tid 18031] [client 10.0.137.129:39284] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /var/www/nextcloud/lib/private/App/AppStore/Fetcher/Fetcher.php on line 111
+[Thu Oct 15 08:05:33.729263 2026] [php:error] [pid 18031:tid 18031] [client 10.0.137.129:39284] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /var/www/nextcloud/lib/composer/composer/ClassLoader.php on line 576
+[Thu Oct 15 08:12:12.041386 2026] [php:error] [pid 18038:tid 18038] [client 10.0.137.129:39854] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /var/www/nextcloud/lib/private/App/AppStore/Fetcher/Fetcher.php on line 111
+[Thu Oct 15 08:12:12.042431 2026] [php:error] [pid 18038:tid 18038] [client 10.0.137.129:39854] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /var/www/nextcloud/lib/composer/composer/ClassLoader.php on line 576
 root@debian:~# 
