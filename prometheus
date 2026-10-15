@@ -1,1 +1,9 @@
-
+cd /tmp
+VER=0.27.0
+wget https://github.com/prometheus/alertmanager/releases/download/v${VER}/alertmanager-${VER}.linux-amd64.tar.gz
+tar xvf alertmanager-${VER}.linux-amd64.tar.gz
+cd alertmanager-${VER}.linux-amd64
+cp alertmanager amtool /usr/local/bin/
+chown alertmanager:alertmanager /usr/local/bin/alertmanager /usr/local/bin/amtool
+cp alertmanager.yml /etc/alertmanager/
+chown alertmanager:alertmanager /etc/alertmanager/alertmanager.yml
