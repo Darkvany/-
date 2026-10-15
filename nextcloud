@@ -1,14 +1,3 @@
-<VirtualHost *:80>
-    ServerName nextcloud
-
-    DocumentRoot /var/www/nextcloud
-
-    <Directory /var/www/nextcloud>
-        Require all granted
-        AllowOverride All
-        Options FollowSymLinks
-    </Directory>
-
-    ErrorLog ${APACHE_LOG_DIR}/nextcloud_error.log
-    CustomLog ${APACHE_LOG_DIR}/nextcloud_access.log combined
-</VirtualHost>
+tail -n 50 /var/www/nextcloud/data/nextcloud.log
+{"reqId":"TxYwLdWDnBADOFzf0kST","level":2,"time":"2026-10-15T04:45:32+00:00","remoteAddr":"10.0.137.129","user":"--","app":"PHP","method":"POST","url":"/","scriptName":"/index.php","message":"Undefined array key \"passwordsalt\" at /var/www/nextcloud/lib/private/Setup.php#375","userAgent":"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","version":"","data":{"app":"PHP"}}
+{"reqId":"TxYwLdWDnBADOFzf0kST","level":2,"time":"2026-10-15T04:45:32+00:00","remoteAddr":"10.0.137.129","user":"--","app":"PHP","method":"POST","url":"/","scriptName":"/index.php","message":"Undefined array key \"secret\" at /var/www/nextcloud/lib/private/Setup.php#376","userAgent":"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","version":"","data":{"app":"PHP"}}
