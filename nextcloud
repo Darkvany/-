@@ -1,5 +1,14 @@
-CREATE DATABASE nextcloud CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'Nextcloud123!';
-GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
+<VirtualHost *:80>
+    ServerName nextcloud
+
+    DocumentRoot /var/www/nextcloud
+
+    <Directory /var/www/nextcloud>
+        Require all granted
+        AllowOverride All
+        Options FollowSymLinks
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/nextcloud_error.log
+    CustomLog ${APACHE_LOG_DIR}/nextcloud_access.log combined
+</VirtualHost>
