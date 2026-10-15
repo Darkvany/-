@@ -1,1 +1,6 @@
-apt install apache2 mariadb-server php php-cli php-common php-gd php-curl php-intl php-zip php-mbstring php-soap php-ldap php-bcmath php-xml php-mysql unzip -y
+apt install -y apache2 mariadb-server \
+  php php-cli libapache2-mod-php \
+  php-mysql php-curl php-gd php-intl \
+  php-mbstring php-soap php-xml php-zip \
+  php-bcmath php-ldap php-opcache \
+  php-readline unzip git curl wget
