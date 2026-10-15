@@ -1,8 +1,13 @@
-cd /tmp
-wget https://download.moodle.org/download.php/direct/stable405/moodle-latest-405.tgz
-tar -xzf moodle-latest-405.tgz -C /var/www/html/
-mv /var/www/html/moodle /var/www/html/moodle-site   # по желанию, чтобы URL был /moodle-site
-mkdir -p /var/www/moodledata
-chown -R www-data:www-data /var/www/html/moodle-site /var/www/moodledata
-chmod -R 755 /var/www/html/moodle-site
-chmod -R 770 /var/www/moodledata
+<VirtualHost *:80>
+    ServerName moodle.local
+    DocumentRoot /var/www/html/moodle-site
+
+    <Directory /var/www/html/moodle-site>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog  /var/log/apache2/moodle_error.log
+    CustomLog /var/log/apache2/moodle_access.log combined
+</VirtualHost>
