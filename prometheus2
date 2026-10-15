@@ -1,5 +1,18 @@
-sed -i 's/^;*max_input_vars.*/max_input_vars = 5000/' /etc/php/*/apache2/php.ini
-sed -i 's/^memory_limit.*/memory_limit = 256M/'        /etc/php/*/apache2/php.ini
-sed -i 's/^upload_max_filesize.*/upload_max_filesize = 100M/' /etc/php/*/apache2/php.ini
-sed -i 's/^post_max_size.*/post_max_size = 100M/'      /etc/php/*/apache2/php.ini
-systemctl restart apache2
+cat >/etc/apache2/sites-available/moodle.conf <<'CONF'
+<VirtualHost *:80>
+    ServerName moodle.local
+    DocumentRoot /var/www/html/moodle-site
+    <Directory /var/www/html/moodle-site>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ErrorLog  ${APACHE_LOG_DIR}/moodle_error.log
+    CustomLog ${APACHE_LOG_DIR}/moodle_access.log combined
+</VirtualHost>
+CONF
+
+a2enmod rewrite
+a2ensite moodle
+a2dissite 000-default
+systemctl reload apache2
