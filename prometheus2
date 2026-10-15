@@ -1,18 +1,3 @@
-cat >/etc/apache2/sites-available/moodle.conf <<'CONF'
-<VirtualHost *:80>
-    ServerName moodle.local
-    DocumentRoot /var/www/html/moodle-site
-    <Directory /var/www/html/moodle-site>
-        Options FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
-    ErrorLog  ${APACHE_LOG_DIR}/moodle_error.log
-    CustomLog ${APACHE_LOG_DIR}/moodle_access.log combined
-</VirtualHost>
-CONF
-
-a2enmod rewrite
-a2ensite moodle
-a2dissite 000-default
-systemctl reload apache2
+apt -y install apache2 mariadb-server php php-cli php-mysql php-xml php-mbstring \
+  php-curl php-zip php-gd php-intl php-soap php-opcache php-ldap \
+  unzip wget git
