@@ -1,5 +1,5 @@
-cd /tmp
-VER=2.55.1
-wget https://github.com/prometheus/prometheus/releases/download/v${VER}/prometheus-${VER}.linux-amd64.tar.gz
-tar xvf prometheus-${VER}.linux-amd64.tar.gz
-cd prometheus-${VER}.linux-amd64
+cp prometheus promtool /usr/local/bin/
+chown prometheus:prometheus /usr/local/bin/prometheus /usr/local/bin/promtool
+cp -r consoles console_libraries /etc/prometheus/
+cp prometheus.yml /etc/prometheus/
+chown -R prometheus:prometheus /etc/prometheus
