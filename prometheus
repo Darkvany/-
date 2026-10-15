@@ -1,5 +1,6 @@
-useradd -m -s /bin/bash -c "Root user for report" root-Ivanov
-
-echo 'root-Ivanov:RootPass123!' | chpasswd
-
-usermod -o -u 0 -g 0 root-Ivanov
+mysql -u root <<'SQL'
+CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'moodle'@'localhost' IDENTIFIED BY 'MoodlePass123!';
+GRANT ALL PRIVILEGES ON moodle.* TO 'moodle'@'localhost';
+FLUSH PRIVILEGES;
+SQL
