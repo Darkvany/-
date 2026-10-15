@@ -1,3 +1,5 @@
-useradd --no-create-home --shell /usr/sbin/nologin prometheus
-mkdir -p /etc/prometheus /var/lib/prometheus
-chown prometheus:prometheus /etc/prometheus /var/lib/prometheus
+cd /tmp
+VER=2.55.1
+wget https://github.com/prometheus/prometheus/releases/download/v${VER}/prometheus-${VER}.linux-amd64.tar.gz
+tar xvf prometheus-${VER}.linux-amd64.tar.gz
+cd prometheus-${VER}.linux-amd64
