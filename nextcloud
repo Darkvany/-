@@ -10,28 +10,3 @@ Zend Engine v4.4.26, Copyright (c) Zend Technologies
 root@debian:~# ls /etc/php/
 8.4
 root@debian:~# 
-
-root@debian:~# curl -I https://download.nextcloud.com
-HTTP/1.1 200 OK
-Date: Thu, 15 Oct 2026 04:59:38 GMT
-Server: Apache
-Strict-Transport-Security: max-age=63072000; includeSubDomains
-Content-Type: text/html;charset=UTF-8
-
-root@debian:~# ls -i /var/www/nextcloud/config/config.php
-1347321 /var/www/nextcloud/config/config.php
-root@debian:~# sudo -u www-data php /var/www/nextcloud/occ status
-  - installed: true
-  - version: 35.0.1.1
-  - versionstring: 35.0.1
-  - edition: 
-  - maintenance: false
-  - needsDbUpgrade: false
-  - productname: Nextcloud
-  - extendedSupport: false
-root@debian:~# grep -E "'(installed|dbtype|dbname|dbuser)' " /var/www/nextcloud/config/config.php
-  'dbtype' => 'mysql',
-  'dbname' => 'nextcloud',
-  'dbuser' => 'nextcloud',
-  'installed' => true,
-root@debian:~# 
