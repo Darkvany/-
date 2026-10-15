@@ -1,40 +1,5 @@
-global:
-  resolve_timeout: 5m
-  smtp_smarthost: 'smtp.example.com:587'
-  smtp_from: 'alertmanager@example.com'
-  smtp_auth_username: 'alertmanager@example.com'
-  smtp_auth_password: 'PASSWORD'
-  smtp_require_tls: true
-
-route:
-  group_by: ['alertname', 'instance']
-  group_wait: 30s
-  group_interval: 5m
-  repeat_interval: 4h
-  receiver: 'email-admin'
-  routes:
-    - match:
-        severity: critical
-      receiver: 'email-admin'
-      continue: true
-    - match:
-        severity: warning
-      receiver: 'webhook-dev'
-
-receivers:
-  - name: 'email-admin'
-    email_configs:
-      - to: 'admin@example.com'
-        send_resolved: true
-
-  - name: 'webhook-dev'
-    webhook_configs:
-      - url: 'http://127.0.0.1:8080/alerts'
-        send_resolved: true
-
-inhibit_rules:
-  - source_match:
-      severity: 'critical'
-    target_match:
-      severity: 'warning'
-    equal: ['alertname', 'instance']
+CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'moodle'@'localhost' IDENTIFIED BY 'MoodlePass123!';
+GRANT ALL PRIVILEGES ON moodle.* TO 'moodle'@'localhost';
+FLUSH PRIVILEGES;
+SQL
