@@ -1,5 +1,8 @@
-CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'moodle'@'localhost' IDENTIFIED BY 'MoodlePass123!';
-GRANT ALL PRIVILEGES ON moodle.* TO 'moodle'@'localhost';
-FLUSH PRIVILEGES;
-SQL
+cd /tmp
+wget https://download.moodle.org/download.php/direct/stable405/moodle-latest-405.tgz
+tar -xzf moodle-latest-405.tgz -C /var/www/html/
+mv /var/www/html/moodle /var/www/html/moodle-site   # по желанию, чтобы URL был /moodle-site
+mkdir -p /var/www/moodledata
+chown -R www-data:www-data /var/www/html/moodle-site /var/www/moodledata
+chmod -R 755 /var/www/html/moodle-site
+chmod -R 770 /var/www/moodledata
