@@ -1,6 +1,13 @@
-apt install -y apache2 mariadb-server \
-  php php-cli libapache2-mod-php \
-  php-mysql php-curl php-gd php-intl \
-  php-mbstring php-soap php-xml php-zip \
-  php-bcmath php-ldap php-opcache \
-  php-readline unzip git curl wget
+CREATE DATABASE moodle
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'moodleuser'@'localhost'
+  IDENTIFIED BY 'ЗАМЕНИ_НА_СВОЙ_ПАРОЛЬ';
+
+GRANT ALL PRIVILEGES ON moodle.*
+  TO 'moodleuser'@'localhost';
+
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+EXIT;
