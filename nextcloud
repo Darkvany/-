@@ -1,3 +1,43 @@
-tail -n 50 /var/www/nextcloud/data/nextcloud.log
-{"reqId":"TxYwLdWDnBADOFzf0kST","level":2,"time":"2026-10-15T04:45:32+00:00","remoteAddr":"10.0.137.129","user":"--","app":"PHP","method":"POST","url":"/","scriptName":"/index.php","message":"Undefined array key \"passwordsalt\" at /var/www/nextcloud/lib/private/Setup.php#375","userAgent":"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","version":"","data":{"app":"PHP"}}
-{"reqId":"TxYwLdWDnBADOFzf0kST","level":2,"time":"2026-10-15T04:45:32+00:00","remoteAddr":"10.0.137.129","user":"--","app":"PHP","method":"POST","url":"/","scriptName":"/index.php","message":"Undefined array key \"secret\" at /var/www/nextcloud/lib/private/Setup.php#376","userAgent":"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","version":"","data":{"app":"PHP"}}
+root@debian:~# curl -I https://apps.nextcloud.com
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+content-language: en
+content-security-policy: font-src 'self'; img-src *; form-action 'self' https://github.com; style-src 'self'; default-src 'none'; connect-src 'self'; script-src 'self'
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Thu, 15 Oct 2026 04:59:16 GMT
+permissions-policy: interest-cohort=();
+referrer-policy: same-origin
+server: NCSA/1.42;
+strict-transport-security: max-age=31536000; includeSubDomains; preload;
+vary: Accept-Language,Cookie,Accept-Encoding
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-xss-protection: 1; mode=block;
+content-length: 772864
+
+root@debian:~# curl -I https://download.nextcloud.com
+HTTP/1.1 200 OK
+Date: Thu, 15 Oct 2026 04:59:38 GMT
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubDomains
+Content-Type: text/html;charset=UTF-8
+
+root@debian:~# ls -i /var/www/nextcloud/config/config.php
+1347321 /var/www/nextcloud/config/config.php
+root@debian:~# sudo -u www-data php /var/www/nextcloud/occ status
+  - installed: true
+  - version: 35.0.1.1
+  - versionstring: 35.0.1
+  - edition: 
+  - maintenance: false
+  - needsDbUpgrade: false
+  - productname: Nextcloud
+  - extendedSupport: false
+root@debian:~# grep -E "'(installed|dbtype|dbname|dbuser)' " /var/www/nextcloud/config/config.php
+  'dbtype' => 'mysql',
+  'dbname' => 'nextcloud',
+  'dbuser' => 'nextcloud',
+  'installed' => true,
+root@debian:~# 
