@@ -1,3 +1,17 @@
-useradd --no-create-home --shell /usr/sbin/nologin alertmanager
-mkdir -p /etc/alertmanager /var/lib/alertmanager
-chown alertmanager:alertmanager /etc/alertmanager /var/lib/alertmanager
+[Unit]
+Description=Alertmanager
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=alertmanager
+Group=alertmanager
+Type=simple
+Restart=on-failure
+ExecStart=/usr/local/bin/alertmanager \
+  --config.file=/etc/alertmanager/alertmanager.yml \
+  --storage.path=/var/lib/alertmanager/ \
+  --web.listen-address=0.0.0.0:9093
+
+[Install]
+WantedBy=multi-user.target
