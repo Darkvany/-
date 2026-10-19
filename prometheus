@@ -1,19 +1,19 @@
-cd /tmp
-rm -f moodle-*.tar.gz
+<VirtualHost *:80>
+    ServerName moodle.example.com
+    ServerAdmin admin@example.com
+    DocumentRoot /var/www/moodle
 
-for br in MOODLE_502_STABLE MOODLE_501_STABLE MOODLE_500_STABLE MOODLE_405_STABLE; do
-  url="https://github.com/moodle/moodle/archive/refs/heads/${br}.tar.gz"
-  echo "==> Пробую $br ..."
-  if curl -fL --progress-bar -o "moodle-${br}.tar.gz" "$url"; then
-    sz=$(stat -c%s "moodle-${br}.tar.gz")
-    if [ "$sz" -gt 50000000 ]; then
-      echo "=== OK: $br скачалась, $(du -h moodle-${br}.tar.gz | cut -f1) ==="
-      break
-    else
-      echo "    файл слишком маленький ($sz байт), пропускаю"
-      rm -f "moodle-${br}.tar.gz"
-    fi
-  fi
-done
+    <Directory /var/www/moodle>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
 
-ls -lh /tmp/moodle-*.tar.gz
+    # Запрет доступа к moodledata через веб
+    <Directory /var/moodledata>
+        Require all denied
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/moodle_error.log
+    CustomLog ${APACHE_LOG_DIR}/moodle_access.log combined
+</VirtualHost>
