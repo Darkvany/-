@@ -1,2 +1,4 @@
-openssl x509 -req -in server.csr -CA ca.pem -CAkey ca.key -CAcreateserial \
-  -days 825 -extfile server.ext -out server.pem
+openssl x509 -req -in pc${i}.csr \
+    -CA ca.pem -CAkey ca.key -CAcreateserial \
+    -out pc${i}.pem -days 365 \
+    -extfile <(printf "basicConstraints=CA:FALSE\nkeyUsage=critical,digitalSignature\nextendedKeyUsage=clientAuth")
