@@ -1,3 +1,2 @@
-penssl req -new -newkey rsa:2048 -nodes \
-  -keyout server.key -out server.csr \
-  -subj "/C=RU/ST=Lab/L=Moscow/O=PnetLab/CN=radius.pnetlab.local"
+openssl x509 -req -in server.csr -CA ca.pem -CAkey ca.key -CAcreateserial \
+  -days 825 -extfile server.ext -out server.pem
