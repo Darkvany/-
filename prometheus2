@@ -1,4 +1,3 @@
-openssl x509 -req -in pc${i}.csr \
-    -CA ca.pem -CAkey ca.key -CAcreateserial \
-    -out pc${i}.pem -days 365 \
-    -extfile <(printf "basicConstraints=CA:FALSE\nkeyUsage=critical,digitalSignature\nextendedKeyUsage=clientAuth")
+chown freerad:freerad pc1.pem pc2.pem pc3.pem pc1.key pc2.key pc3.key
+chmod 644 pc1.pem pc2.pem pc3.pem
+chmod 600 pc1.key pc2.key pc3.key
