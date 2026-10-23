@@ -1,11 +1,10 @@
-sudo -i
 mkdir -p /usr/local/share/ca-certificates
-scp root@10.0.137/235:/etc/freeradius/3.0/certs/ca.pem \
+scp root@10.0.137.235:/etc/freeradius/3.0/certs/ca.pem \
     /usr/local/share/ca-certificates/pnetlab-ca.crt
 update-ca-certificates
 
-scp root@10.0.137.235:/etc/freeradius/3.0/certs/pc2.pem \
-    /etc/wpa_supplicant/certs/pc2.pem
+scp root@10.0.137.235:/etc/freeradius/3.0/certs/pc3.pem \
+    /etc/wpa_supplicant/certs/pc3.pem
 
-chmod 644 /etc/wpa_supplicant/certs/pc2.pem
-chmod 600 /etc/wpa_supplicant/certs/pc2.key
+chmod 644 /etc/wpa_supplicant/certs/pc3.pem
+chmod 600 /etc/wpa_supplicant/certs/pc3.key
