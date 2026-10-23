@@ -1,6 +1,16 @@
-cat > server.ext <<'EOF'
+for n in pc1 pc2 pc3; do
+  cat > /root/$n.ext <<EOF
 basicConstraints=CA:FALSE
-keyUsage=critical,digitalSignature,keyEncipherment
-extendedKeyUsage=serverAuth
-subjectAltName=DNS:radius.pnetlab.local,IP:192.168.10.10
+keyUsage=critical,digitalSignature
+extendedKeyUsage=clientAuth
+subjectAltName=DNS:$n
 EOF
+
+  openssl x509 -req -in /root/$n.csr \
+    -CA ca.pem -CAkey ca.key -CAcreateserial \
+    -days 825 -extfile /root/$n.ext -out $n.pem
+
+chown freerad:freerad pc1.pem pc2.pem pc3.pem
+chmod 644 pc1.pem pc2.pem pc3.pem
+
+openssl verify -CAfile ca.pem pc1.pem pc2.pem pc3.pem
