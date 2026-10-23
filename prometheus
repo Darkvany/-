@@ -1,3 +1,7 @@
 openssl req -new -newkey rsa:2048 -nodes \
-    -keyout pc${i}.key -out pc${i}.csr \
-    -subj "/C=RU/ST=Lab/L=PnetLab/O=Lab/CN=pc${i}"
+  -keyout pc2.key -out pc2.csr \
+  -subj "/C=RU/ST=Lab/L=PnetLab/O=Lab/CN=pc2"
+
+openssl x509 -req -in pc2.csr \
+  -CA ca.pem -CAkey ca.key -CAcreateserial \
+  -out pc2.pem -days 365
