@@ -1,17 +1,9 @@
-client pc1 {
-    ipaddr = 192.168.10.11/32
-    secret = RadiusLab_2026
-    require_message_authenticator = yes
-}
-
-client pc2 {
-    ipaddr = 192.168.10.12/32
-    secret = RadiusLab_2026
-    require_message_authenticator = yes
-}
-
-client pc3 {
-    ipaddr = 192.168.10.13/32
-    secret = RadiusLab_2026
-    require_message_authenticator = yes
+network={
+    key_mgmt=WPA-EAP
+    eap=TLS
+    identity="pc1"
+    ca_cert="/usr/local/share/ca-certificates/pnetlab-ca.crt"
+    client_cert="/etc/wpa_supplicant/certs/pc1.pem"
+    private_key="/etc/wpa_supplicant/certs/pc1.key"
+    private_key_passwd=""
 }
