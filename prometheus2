@@ -615,7 +615,110 @@ reading pairlist file /etc/freeradius/3.0/mods-config/files/pre-proxy
     	softfail = no
     }
    }
-tls: (TLS) Failed loading randomness
-rlm_eap_tls: Failed initializing SSL context
-rlm_eap (EAP): Failed to initialise rlm_eap_tls
-/etc/freeradius/3.0/mods-enabled/eap[14]: Instantiation failed for module "eap"
+tls: Setting DH parameters from /etc/freeradius/3.0/certs/dh - this is no longer necessary.
+tls: You should comment out the 'dh_file' configuration item.
+   # Linked to sub-module rlm_eap_ttls
+   ttls {
+   	tls = "tls-common"
+   	default_eap_type = "md5"
+   	copy_request_to_tunnel = no
+   	use_tunneled_reply = no
+   	virtual_server = "inner-tunnel"
+   	include_length = yes
+   	require_client_cert = no
+   }
+tls: Using cached TLS configuration from previous invocation
+   # Linked to sub-module rlm_eap_peap
+   peap {
+   	tls = "tls-common"
+   	default_eap_type = "mschapv2"
+   	copy_request_to_tunnel = no
+   	use_tunneled_reply = no
+   	proxy_tunneled_request_as_eap = yes
+   	virtual_server = "inner-tunnel"
+   	soh = no
+   	require_client_cert = no
+   }
+tls: Using cached TLS configuration from previous invocation
+   # Linked to sub-module rlm_eap_mschapv2
+   mschapv2 {
+   	with_ntdomain_hack = no
+   	send_error = no
+   }
+  # Instantiating module "preprocess" from file /etc/freeradius/3.0/mods-enabled/preprocess
+reading pairlist file /etc/freeradius/3.0/mods-config/preprocess/huntgroups
+reading pairlist file /etc/freeradius/3.0/mods-config/preprocess/hints
+  # Instantiating module "etc_passwd" from file /etc/freeradius/3.0/mods-enabled/passwd
+rlm_passwd: nfields: 3 keyfield 0(User-Name) listable: no
+  # Instantiating module "reject" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "fail" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "ok" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "handled" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "invalid" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "userlock" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "notfound" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "noop" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "updated" from file /etc/freeradius/3.0/mods-enabled/always
+  # Instantiating module "linelog" from file /etc/freeradius/3.0/mods-enabled/linelog
+  # Instantiating module "log_accounting" from file /etc/freeradius/3.0/mods-enabled/linelog
+  # Instantiating module "expiration" from file /etc/freeradius/3.0/mods-enabled/expiration
+  # Instantiating module "detail" from file /etc/freeradius/3.0/mods-enabled/detail
+  # Instantiating module "logintime" from file /etc/freeradius/3.0/mods-enabled/logintime
+  # Instantiating module "auth_log" from file /etc/freeradius/3.0/mods-enabled/detail.log
+rlm_detail (auth_log): 'User-Password' suppressed, will not appear in detail output
+  # Instantiating module "reply_log" from file /etc/freeradius/3.0/mods-enabled/detail.log
+  # Instantiating module "pre_proxy_log" from file /etc/freeradius/3.0/mods-enabled/detail.log
+  # Instantiating module "post_proxy_log" from file /etc/freeradius/3.0/mods-enabled/detail.log
+  # Instantiating module "attr_filter.post-proxy" from file /etc/freeradius/3.0/mods-enabled/attr_filter
+reading pairlist file /etc/freeradius/3.0/mods-config/attr_filter/post-proxy
+  # Instantiating module "attr_filter.pre-proxy" from file /etc/freeradius/3.0/mods-enabled/attr_filter
+reading pairlist file /etc/freeradius/3.0/mods-config/attr_filter/pre-proxy
+  # Instantiating module "attr_filter.access_reject" from file /etc/freeradius/3.0/mods-enabled/attr_filter
+reading pairlist file /etc/freeradius/3.0/mods-config/attr_filter/access_reject
+  # Instantiating module "attr_filter.access_challenge" from file /etc/freeradius/3.0/mods-enabled/attr_filter
+reading pairlist file /etc/freeradius/3.0/mods-config/attr_filter/access_challenge
+  # Instantiating module "attr_filter.accounting_response" from file /etc/freeradius/3.0/mods-enabled/attr_filter
+reading pairlist file /etc/freeradius/3.0/mods-config/attr_filter/accounting_response
+  # Instantiating module "attr_filter.coa" from file /etc/freeradius/3.0/mods-enabled/attr_filter
+reading pairlist file /etc/freeradius/3.0/mods-config/attr_filter/coa
+  # Instantiating module "mschap" from file /etc/freeradius/3.0/mods-enabled/mschap
+rlm_mschap (mschap): using internal authentication
+  # Instantiating module "pap" from file /etc/freeradius/3.0/mods-enabled/pap
+ } # modules
+radiusd: #### Loading Virtual Servers ####
+server { # from file /etc/freeradius/3.0/radiusd.conf
+} # server
+server inner-tunnel { # from file /etc/freeradius/3.0/sites-enabled/inner-tunnel
+ # Loading authenticate {...}
+Compiling Auth-Type PAP for attr Auth-Type
+Compiling Auth-Type CHAP for attr Auth-Type
+Compiling Auth-Type MS-CHAP for attr Auth-Type
+ # Loading authorize {...}
+Ignoring "sql" (see raddb/mods-available/README.rst)
+Ignoring "ldap" (see raddb/mods-available/README.rst)
+ # Loading post-proxy {...}
+ # Loading post-auth {...}
+ # Skipping contents of 'if' as it is always 'false' -- /etc/freeradius/3.0/sites-enabled/inner-tunnel:366
+Compiling Post-Auth-Type REJECT for attr Post-Auth-Type
+} # server inner-tunnel
+server default { # from file /etc/freeradius/3.0/sites-enabled/default
+ # Loading authenticate {...}
+Compiling Auth-Type PAP for attr Auth-Type
+Compiling Auth-Type CHAP for attr Auth-Type
+Compiling Auth-Type MS-CHAP for attr Auth-Type
+ # Loading authorize {...}
+Compiling Autz-Type New-TLS-Connection for attr Autz-Type
+ # Loading preacct {...}
+ # Loading accounting {...}
+ # Loading post-auth {...}
+Compiling Post-Auth-Type REJECT for attr Post-Auth-Type
+Compiling Post-Auth-Type Challenge for attr Post-Auth-Type
+Compiling Post-Auth-Type Client-Lost for attr Post-Auth-Type
+} # server default
+radiusd: #### Opening IP addresses and Ports ####
+listen {
+  	type = "auth"
+  	ipaddr = 127.0.0.1
+  	port = 18120
+Failed binding to auth address 127.0.0.1 port 18120 bound to server inner-tunnel: Address already in use 
+/etc/freeradius/3.0/sites-enabled/inner-tunnel[33]: Error binding to port for 127.0.0.1 port 18120
