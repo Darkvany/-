@@ -1,7 +1,17 @@
-openssl req -new -newkey rsa:2048 -nodes \
-  -keyout pc2.key -out pc2.csr \
-  -subj "/C=RU/ST=Lab/L=PnetLab/O=Lab/CN=pc2"
+client pc1 {
+    ipaddr = 192.168.10.11/32
+    secret = RadiusLab_2026
+    require_message_authenticator = yes
+}
 
-openssl x509 -req -in pc2.csr \
-  -CA ca.pem -CAkey ca.key -CAcreateserial \
-  -out pc2.pem -days 365
+client pc2 {
+    ipaddr = 192.168.10.12/32
+    secret = RadiusLab_2026
+    require_message_authenticator = yes
+}
+
+client pc3 {
+    ipaddr = 192.168.10.13/32
+    secret = RadiusLab_2026
+    require_message_authenticator = yes
+}
