@@ -1,5 +1,6 @@
-openssl req -x509 -newkey rsa:4096 -nodes -days 3650 \
-  -keyout ca.key -out ca.pem \
-  -subj "/C=RU/ST=Lab/L=Moscow/O=PnetLab/CN=PnetLab Root CA" \
-  -addext "basicConstraints=critical,CA:TRUE" \
-  -addext "keyUsage=critical,keyCertSign,cRLSign"
+cat > server.ext <<'EOF'
+basicConstraints=CA:FALSE
+keyUsage=critical,digitalSignature,keyEncipherment
+extendedKeyUsage=serverAuth
+subjectAltName=DNS:radius.pnetlab.local,IP:192.168.10.10
+EOF
