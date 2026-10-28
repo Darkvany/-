@@ -1,0 +1,5 @@
+wget http://192.168.227.92:8081/Additional.iso -O /tmp/Additional.iso
+apt update && apt install p7zip-full -y
+mkdir -p /root/Additional
+7z x /tmp/Additional.iso -o/root/Additional
+ls -l /root/Additional/
